@@ -4,5 +4,5 @@ metadata:
   name: video-config
 data:
   NODE_ENV: production
-  PORT: 3003
+  PORT: "3003"
    
