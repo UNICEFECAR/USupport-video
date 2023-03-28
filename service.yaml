@@ -4,7 +4,7 @@ metadata:
   name: video-service
 spec:
   selector:
-    app: user
+    app: video
   ports:
     - port: 3003
       targetPort: 3003
