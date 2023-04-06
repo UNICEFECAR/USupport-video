@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video
+  namespace: default
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: video
+  template:
+    metadata:
+      labels:
+        app: video
+    spec:
+      containers:
+      - name: video
+        image: 482053628475.dkr.ecr.eu-central-1.amazonaws.com/usupport-video-api:beta
+        imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: video-secrets
+        - configMapRef:
+            name: video-config
+        ports:
+        - containerPort: 3003
+      imagePullSecrets:
+      - name: regcred
