@@ -41,9 +41,6 @@ export const getTwilioToken = async ({
       throw err;
     });
 
-  if (consultation.status !== "scheduled") {
-    throw consultationNotScheduled(language);
-  }
   const token = videoToken(userId, consultationId, TWILIO_CONFIG);
 
   return { token: token.toJwt() };
