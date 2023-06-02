@@ -11,7 +11,6 @@ export const generateToken = (config) => {
 };
 
 export const videoToken = (identity, room, config) => {
-  console.log(identity, "identity");
   let videoGrant;
   if (typeof room !== "undefined") {
     videoGrant = new VideoGrant({ room });
