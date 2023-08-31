@@ -17,7 +17,7 @@ import {
   updateConsultationStatusAsFinishedQuery,
 } from "#queries/video";
 
-import { consultationNotFound, consultationNotScheduled } from "#utils/errors";
+import { consultationNotFound } from "#utils/errors";
 
 export const getTwilioToken = async ({
   userId,
@@ -26,7 +26,7 @@ export const getTwilioToken = async ({
   consultationId,
 }) => {
   // Check if the consultation is in the right status
-  const consultation = await getConsultationByIdQuery({
+  await getConsultationByIdQuery({
     poolCountry: country,
     consultationId,
   })
