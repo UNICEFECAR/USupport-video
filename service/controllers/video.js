@@ -15,6 +15,7 @@ import {
   leaveConsultationClientQuery,
   leaveConsultationProviderQuery,
   updateConsultationStatusAsFinishedQuery,
+  updateConsultationStatusQuery,
 } from "#queries/video";
 
 import { consultationNotFound } from "#utils/errors";
@@ -115,6 +116,23 @@ export const leaveConsultation = async ({
     .catch((err) => {
       throw err;
     });
+
+  return { success: true };
+};
+
+export const changeConsultationStatus = async ({
+  country,
+  language,
+  consultationId,
+  status,
+}) => {
+  await updateConsultationStatusQuery({
+    poolCountry: country,
+    consultationId,
+    status,
+  }).catch((err) => {
+    throw err;
+  });
 
   return { success: true };
 };

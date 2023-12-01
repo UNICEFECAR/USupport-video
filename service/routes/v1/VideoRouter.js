@@ -2,9 +2,14 @@ import express from "express";
 
 const router = express.Router();
 
-import { getTwilioToken, leaveConsultation } from "#controllers/video";
+import {
+  changeConsultationStatus,
+  getTwilioToken,
+  leaveConsultation,
+} from "#controllers/video";
 
 import {
+  changeConsultationStatusSchema,
   getTwilioTokenSchema,
   leaveConsultationSchema,
 } from "#schemas/videoSchemas";
@@ -45,6 +50,25 @@ router.put("/leave-consultation", async (req, res, next) => {
     .strict()
     .validate({ country, language, userId, ...payload })
     .then(leaveConsultation)
+    .then((result) => res.status(200).send(result))
+    .catch(next);
+});
+
+router.put("/status", async (req, res, next) => {
+  /**
+   * #route   PUT /provider/v1/consultation/finished
+   * #desc    Client/Provider leave a consultation
+   */
+  const country = req.header("x-country-alpha-2");
+  const language = req.header("x-language-alpha-2");
+
+  const payload = { ...req.body };
+
+  return await changeConsultationStatusSchema
+    .noUnknown(true)
+    .strict()
+    .validate({ country, language, ...payload })
+    .then(changeConsultationStatus)
     .then((result) => res.status(200).send(result))
     .catch(next);
 });

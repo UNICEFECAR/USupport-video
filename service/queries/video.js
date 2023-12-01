@@ -63,3 +63,20 @@ export const updateConsultationStatusAsFinishedQuery = async ({
     `,
     [consultationId]
   );
+
+export const updateConsultationStatusQuery = async ({
+  poolCountry,
+  consultationId,
+  status,
+}) => {
+  await getDBPool("clinicalDb", poolCountry).query(
+    `
+
+      UPDATE consultation
+      SET status = $1
+      WHERE consultation_id = $2
+      
+    `,
+    [status, consultationId]
+  );
+};
