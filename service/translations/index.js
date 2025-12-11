@@ -3,6 +3,7 @@ import ru from "./ru.js";
 import kk from "./kk.js";
 import pl from "./pl.js";
 import uk from "./uk.js";
+import el from "./el.js";
 
 const translations = {
   en,
@@ -10,6 +11,7 @@ const translations = {
   ru,
   pl,
   uk,
+  el,
 };
 
 /**
